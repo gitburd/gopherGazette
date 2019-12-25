@@ -8,6 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/heroku/x/hmetrics/onload"
+	"github.com/russross/blackfriday"
 )
 
 func main() {
@@ -28,6 +29,10 @@ func main() {
 
 	router.GET("/test", func(c *gin.Context) {
 		fmt.Println("test")
+	})
+
+	router.GET("/mark", func(c *gin.Context) {
+		c.String(http.StatusOK, string(blackfriday.Run([]byte("**hi!**"))))
 	})
 
 	router.Run(":" + port)
