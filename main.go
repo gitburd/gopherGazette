@@ -6,7 +6,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/heroku/x/hmetrics/onload"
@@ -22,41 +21,7 @@ type Item struct {
 	Likes   int    `json:"likes"`
 }
 
-func dbFunc(db *sql.DB) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		if _, err := db.Exec("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)"); err != nil {
-			c.String(http.StatusInternalServerError,
-				fmt.Sprintf("Error creating database table: %q", err))
-			return
-		}
-
-		if _, err := db.Exec("INSERT INTO ticks VALUES (now())"); err != nil {
-			c.String(http.StatusInternalServerError,
-				fmt.Sprintf("Error incrementing tick: %q", err))
-			return
-		}
-
-		rows, err := db.Query("SELECT tick FROM ticks")
-		if err != nil {
-			c.String(http.StatusInternalServerError,
-				fmt.Sprintf("Error reading ticks: %q", err))
-			return
-		}
-
-		defer rows.Close()
-		for rows.Next() {
-			var tick time.Time
-			if err := rows.Scan(&tick); err != nil {
-				c.String(http.StatusInternalServerError,
-					fmt.Sprintf("Error scanning ticks: %q", err))
-				return
-			}
-			c.String(http.StatusOK, fmt.Sprintf("Read from DB: %s\n", tick.String()))
-		}
-	}
-}
-
-func newsFunc(db *sql.DB) gin.HandlerFunc {
+func getNews(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var items []Item
 
@@ -70,22 +35,15 @@ func newsFunc(db *sql.DB) gin.HandlerFunc {
 		defer rows.Close()
 		for rows.Next() {
 			var item Item
-			// var id int
-			// var title string
-			// var details string
-			// var url string
-			// var image string
-			// var likes int
 
-			if err := rows.Scan(&item.ID, &item.Title, &item.Details, &item.Url, &item.Image, &item.Likes); err != nil {
+			if err := rows.Scan(&item.ID, &item.Title, &item.Details, &item.Image, &item.Url, &item.Likes); err != nil {
 				c.String(http.StatusInternalServerError,
 					fmt.Sprintf("Error scanning news: %q", err))
 				return
 			}
 			items = append(items, item)
-			c.String(http.StatusOK, fmt.Sprintf("Read from DB: %v : %s - %s %s %s %v\n", item.ID, item.Title, item.Details, item.Url, item.Image, item.Likes))
 		}
-		fmt.Println(items)
+		c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": items})
 	}
 }
 
@@ -103,11 +61,6 @@ func main() {
 
 	defer db.Close()
 
-	err = db.Ping()
-	if err != nil {
-		panic(err)
-	}
-
 	router := gin.New()
 	router.Use(gin.Logger())
 	router.LoadHTMLGlob("templates/*.tmpl.html")
@@ -116,8 +69,8 @@ func main() {
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.tmpl.html", nil)
 	})
-	router.GET("/db", dbFunc(db))
-	router.GET("/news", newsFunc(db))
+
+	router.GET("/api", getNews(db))
 
 	router.Run(":" + port)
 }

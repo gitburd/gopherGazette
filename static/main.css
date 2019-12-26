@@ -4,7 +4,7 @@
 }
 #feed{
   color:black;
-  background-color:hsla(0, 100%, 100%, 0);
+  /* background-color:hsla(0, 100%, 100%, 0); */
   margin: 0px auto;
   font-family: 'Roboto', sans-serif;
 }
@@ -18,10 +18,19 @@
 }
 
 .title{
-  font-size: calc(10px + 4vmin) !important;
+  font-size: calc(10px + 2vmin) !important;
   font-family: 'Bitter', serif;
 }
     
-.item-image{
-    max-width: 100% !important;
+.item{
+  width:100%;
+  margin:15px;
+  float:left;
+  background-color: white;
+}
+.image{
+  width:25%;
+  float:left;
+  padding-right: 20px;
+  padding-bottom: 0;
 }
