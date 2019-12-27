@@ -25,7 +25,6 @@ class App extends React.Component{
   }
 }
 
-
 class Home extends React.Component{
   render(){
     var {items} = this.props
@@ -33,12 +32,11 @@ class Home extends React.Component{
       <div>
         <div className="container">
         <div id="feed" >
-          {/* <div className="col-xs-12 jumbotron text-center" id="feed" > */}
-            {items.length > 0 ? 
-              items.map((item)=>(
-                <Item item={item}/>))
-              :"" 
-            }
+          {items.length > 0 ? 
+            items.map((item)=>(
+              <Item item={item}/>))
+            :"" 
+          }
           </div>
         </div>
       </div>
@@ -60,7 +58,7 @@ class Item extends React.Component{
           }} >
           <img className="image" src={image} alt="" 
               style={{ 
-                width:"25%",
+                width:"18%",
                 float:"left",
                 paddingRight: "20px",
                 paddingBottom: "0"
