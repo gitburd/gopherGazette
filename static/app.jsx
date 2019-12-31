@@ -72,33 +72,26 @@ class Item extends React.Component{
             </a>
           </div>
             {details}  
+            <div className="like_button_container" data-commentid="1">
+              <button onClick={e => upvote(e, id)}>like</button>{likes}
+            </div>
+            
         </div>
-            {/* <div className="like_button_container" data-commentid="1">
-              {likes}
-          </div> */}
+            
       </div>
     )
   }
 }
 
-// class LikeBtn extends React.Component{
-// constructor(props) {
-//   super(props);
-//   this.state = { liked: false };
-// }
-// render() {
-//   if (this.state.liked) {
-//     return 'You liked it!'  
-//   }
-
-//   return e(
-//     'button',
-//     { onClick: () => this.setState({ liked: true }) },
-//     'Like'
-//   );
-// }
-// }
-
+function upvote (e, id) {
+  e.preventDefault();
+  console.log(id, "clicked")
+  fetch(`/api/${id}`,{
+    method: 'PUT'
+})
+  .then(res => res.json(), window.location.reload(false))
+  .catch(console.log)
+}
 
 
 ReactDOM.render(

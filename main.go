@@ -25,7 +25,7 @@ func getNews(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var items []Item
 
-		rows, err := db.Query("SELECT * FROM news")
+		rows, err := db.Query("SELECT * FROM news ORDER BY likes DESC")
 		if err != nil {
 			c.String(http.StatusInternalServerError,
 				fmt.Sprintf("Error reading news: %q", err))
@@ -35,7 +35,6 @@ func getNews(db *sql.DB) gin.HandlerFunc {
 		defer rows.Close()
 		for rows.Next() {
 			var item Item
-
 			if err := rows.Scan(&item.ID, &item.Title, &item.Details, &item.Image, &item.Url, &item.Likes); err != nil {
 				c.String(http.StatusInternalServerError,
 					fmt.Sprintf("Error scanning news: %q", err))
@@ -44,6 +43,41 @@ func getNews(db *sql.DB) gin.HandlerFunc {
 			items = append(items, item)
 		}
 		c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": items})
+	}
+}
+
+func upVote(db *sql.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// var items []Item
+		var id = c.Param("id")
+		var likes int
+
+		rows, err := db.Query("SELECT id, likes FROM news WHERE id = $1", id)
+		if err != nil {
+			c.String(http.StatusInternalServerError,
+				fmt.Sprintf("Error reading news: %q", err))
+			return
+		}
+
+		defer rows.Close()
+		for rows.Next() {
+			var item Item
+			if err := rows.Scan(&item.ID, &item.Likes); err != nil {
+				c.String(http.StatusInternalServerError,
+					fmt.Sprintf("Error scanning news: %q", err))
+				return
+			}
+			likes = item.Likes + 1
+			// items = append(items, item)
+		}
+		res, err := db.Exec("UPDATE news SET likes = $1 WHERE id = $2", likes, id)
+		if err != nil {
+			c.String(http.StatusInternalServerError,
+				fmt.Sprintf("Error putting news: %q", err))
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": likes, "res": res})
 	}
 }
 
@@ -71,6 +105,8 @@ func main() {
 	})
 
 	router.GET("/api", getNews(db))
+
+	router.PUT("/api/:id", upVote(db))
 
 	router.Run(":" + port)
 }
