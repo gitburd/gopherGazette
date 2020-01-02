@@ -73,7 +73,18 @@ class Item extends React.Component{
           </div>
             {details}  
             <div className="like_button_container" data-commentid="1">
-              <button onClick={e => upvote(e, id)}>like</button>{likes}
+              <a href="">
+              <img 
+                  className="heart"
+                  src="../static/heart.png" 
+                  onClick={e => upvote(e, id)}
+                  style={{
+                    width:"5vmin",
+                    padding:"5px",
+                  }}
+                />
+              </a>
+                {likes}
             </div>
             
         </div>

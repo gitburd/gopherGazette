@@ -48,7 +48,6 @@ func getNews(db *sql.DB) gin.HandlerFunc {
 
 func upVote(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// var items []Item
 		var id = c.Param("id")
 		var likes int
 
@@ -68,7 +67,6 @@ func upVote(db *sql.DB) gin.HandlerFunc {
 				return
 			}
 			likes = item.Likes + 1
-			// items = append(items, item)
 		}
 		res, err := db.Exec("UPDATE news SET likes = $1 WHERE id = $2", likes, id)
 		if err != nil {
