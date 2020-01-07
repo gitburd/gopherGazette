@@ -1,11 +1,12 @@
 class App extends React.Component{
   state={
     items:[]
-  //   items: [
-  //     {id: "1", title: "note1 1 1", details: "type type type", likes:0, image:"https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api", url: "https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api"},
-  //     {id: "2", title: "the foundation", details:"information! learn my information!", likes:0, image:"https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api", url: "https://tse3.mm.bing.net/th?id=OIP.jy4Ho-AVDIf__a3RJAEsVwHaIc&pid=Api"},
-  //     {id: "3", title: "Gotta Learn go", details:"not a scam. i promise. not click bate", image:"https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api",likes:0, url: "https://tse2.mm.bing.net/th?id=OIP.pFaeNO48gYlRMQii977cQgHaET&pid=Api"}
-  // ]
+    // items: [
+    //   {id: "1", title: "Simple Guide to Panic Handling and Recovery in Golang", details: "Golang is now one of the most popular languages for development in the industry. More and more organisations are migrating to use Golang because of its ease of use, concurrency patterns and awesome online community. Go is extremely simple, and has very limited keywords. It is extremely opinionated, and has readily available patterns to achieve certain tasks. One of them is handling panic and recovering from it gracefully. Let us take a look at it. ", likes:10, image:"https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api", url: "https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api"},
+    //   {id: "2", title: "Why Learn Go?", details:"", likes:0, image:"https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api", url: "https://tse3.mm.bing.net/th?id=OIP.jy4Ho-AVDIf__a3RJAEsVwHaIc&pid=Api"},
+    //   {id: "3", title: "go.dev", details:"Today we are launching go.dev, a new hub for Go developers! There you will find a wealth of learning resources to get started with the language, featured use cases, and case studies of companies using Go.", image:"https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api",likes:0, url: "https://tse2.mm.bing.net/th?id=OIP.pFaeNO48gYlRMQii977cQgHaET&pid=Api"},
+    //   {id: "4", title: "lorum sempram", details: "Golang is now one of the most popular languages for development in the industry. More and more organisations are migrating to use Golang because of its ease of use, concurrency patterns and awesome online community. Go is extremely simple, and has very limited keywords. It is extremely opinionated, and has readily available patterns to achieve certain tasks. One of them is handling panic and recovering from it gracefully. Let us take a look at it. ", likes:10, image:"https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api", url: "https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api"},
+    // ]
   }
 
   componentDidMount = function(){
@@ -51,27 +52,41 @@ class Item extends React.Component{
       <div>
         <div className="item" 
           style={{ 
-            width:"100%",
-            margin:"15px",
-            float:"left",  
-            backgroundColor: "white"
+            width:"29%",
+            backgroundColor: "white",
+            float:"left",
+            minWidth:"250px",
+            margin:"2%"
+
           }} >
           <img className="image" src={image} alt="" 
               style={{ 
-                width:"18%",
-                float:"left",
-                paddingRight: "20px",
-                paddingBottom: "0"
+              width:"100%",
+              overflow:"hidden"
               }}
           />
-          <div className="title"> 
+          <div 
+          className="title"
+          style={{
+            padding:"15px",
+          }}
+          > 
             <a href={url} target="_blank">
               <div>
                 {title} 
               </div>
             </a>
           </div>
-            {details}  
+          <div
+                 style={{
+                  padding:"15px",
+                  textAlign: "justify",
+                  textJustify: "inter-word"
+                }}
+                >
+          {details}  
+          </div>
+            
             <div className="like_button_container" data-commentid="1">
               <a href="">
               <img 
