@@ -62,7 +62,8 @@ class Item extends React.Component{
           <img className="image" src={image} alt="" 
               style={{ 
               width:"100%",
-              overflow:"hidden"
+              overflow:"hidden",
+              padding:"0"
               }}
           />
           <div 
@@ -78,12 +79,12 @@ class Item extends React.Component{
             </a>
           </div>
           <div
-                 style={{
-                  padding:"15px",
-                  textAlign: "justify",
-                  textJustify: "inter-word"
-                }}
-                >
+            style={{
+            padding:"15px",
+            textAlign: "justify",
+            textJustify: "inter-word"
+            }}
+          >
           {details}  
           </div>
             
