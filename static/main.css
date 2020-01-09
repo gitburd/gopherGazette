@@ -8,6 +8,14 @@
   color:black;
   margin: 0px auto;
   font-family: 'Roboto', sans-serif;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+
+  grid-gap: .75rem;
+}
+
+#feed > div {
+  padding: .75rem;
 }
     
 #head{
@@ -30,17 +38,15 @@
   background-color: white;
 }
 .image{
-  width:25%;
-  float:left;
-  padding-right: 20px;
-  padding-bottom: 0;
+  width:100%;
 }
 
 .heart{
-  width:2vmin;
+  width: calc(100px + 2vmin);
   padding:5px;
 }
 
 .heart:hover{
   cursor: pointer;
 }
+
