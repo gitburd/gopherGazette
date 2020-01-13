@@ -10,20 +10,22 @@
   font-family: 'Roboto', sans-serif;
   display: grid;
   grid-template-columns: repeat(3, auto);
-
   grid-gap: .75rem;
 }
 
 #feed > div {
-  padding: .75rem;
+  padding: 0 .75rem;
 }
     
 #head{
-  font-size: calc(10px + 4.25vmin);
+  font-size: calc(10px + 5.25vmin);
   width:100%;
   color:white;
-  padding:10px;
+  padding:0;
   font-family: 'Bitter', serif;
+  text-align: 'center';
+  display: block;
+  background-color: black;
 }
 
 .title{
@@ -34,7 +36,6 @@
 .item{
   width:100%;
   margin:15px;
-  float:left;
   background-color: white;
 }
 .image{

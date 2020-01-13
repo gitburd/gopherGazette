@@ -24,8 +24,31 @@ type Item struct {
 func getNews(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var items []Item
-
 		rows, err := db.Query("SELECT * FROM news ORDER BY likes DESC")
+		if err != nil {
+			c.String(http.StatusInternalServerError,
+				fmt.Sprintf("Error reading news: %q", err))
+			return
+		}
+
+		defer rows.Close()
+		for rows.Next() {
+			var item Item
+			if err := rows.Scan(&item.ID, &item.Title, &item.Details, &item.Image, &item.Url, &item.Likes); err != nil {
+				c.String(http.StatusInternalServerError,
+					fmt.Sprintf("Error scanning news: %q", err))
+				return
+			}
+			items = append(items, item)
+		}
+		c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": items})
+	}
+}
+
+func getNewsRecent(db *sql.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var items []Item
+		rows, err := db.Query("SELECT * FROM news ORDER BY id DESC")
 		if err != nil {
 			c.String(http.StatusInternalServerError,
 				fmt.Sprintf("Error reading news: %q", err))
@@ -74,7 +97,6 @@ func upVote(db *sql.DB) gin.HandlerFunc {
 				fmt.Sprintf("Error putting news: %q", err))
 			return
 		}
-
 		c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": likes, "res": res})
 	}
 }
@@ -102,9 +124,10 @@ func main() {
 		c.HTML(http.StatusOK, "index.tmpl.html", nil)
 	})
 
-	router.GET("/api", getNews(db))
+	router.GET("/api/", getNews(db))
+	router.GET("/recent/", getNewsRecent(db))
 
-	router.PUT("/api/:id", upVote(db))
+	router.PUT("/up/:id", upVote(db))
 
 	router.Run(":" + port)
 }
