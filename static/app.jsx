@@ -2,7 +2,7 @@ class App extends React.Component{
   
   state={
     items:[],
-    sort:"recent",
+    // sort:"recent",
   //   items: [
   //     {id: "1", title: "Simple Guide to Panic Handling and Recovery in Golang", details: "Golang is now one of the most popular languages for development in the industry. More and more organisations are migrating to use Golang because of its ease of use, concurrency patterns and awesome online community. Go is extremely simple, and has very limited keywords. It is extremely opinionated, and has readily available patterns to achieve certain tasks. One of them is handling panic and recovering from it gracefully. Let us take a look at it. ", likes:10, image:"https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api", url: "https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api"},
   //     {id: "2", title: "Why Learn Go?", details:"", likes:0, image:"https://tse1.mm.bing.net/th?id=OIP.Uzd2n_pZTnQkCK0_MHE81wHaEq&pid=Api", url: "https://tse3.mm.bing.net/th?id=OIP.jy4Ho-AVDIf__a3RJAEsVwHaIc&pid=Api"},
@@ -62,7 +62,7 @@ class App extends React.Component{
   saveStateToLocalStorage() {
     localStorage.setItem('backup', JSON.stringify(this.state))
   }
-  
+
 
   setSort = function(e, sort){
     e.preventDefault();
@@ -103,11 +103,17 @@ class App extends React.Component{
             }}
           >
             <h1>
-              <span onClick={e => this.setSort(e, "popular")}>
-               Popular 
-                </span>
+              <span 
+              onClick={e => this.setSort(e, "popular")}
+              className="sort"
+              >
+                Popular 
+              </span>
               <span>  |  </span>
-              <span onClick={e => this.setSort(e, "recent")} >
+              <span 
+              onClick={e => this.setSort(e, "recent")} 
+              className="sort"
+              >
                 Recent
               </span>
             </h1>
