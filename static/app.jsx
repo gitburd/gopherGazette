@@ -35,6 +35,35 @@ class App extends React.Component{
     
   }
 
+  componentDidMount() {
+    this.hydrateStateWithLocalStorage();
+    // add event listener to save state to localStorage
+    // when user leaves/refreshes the page
+    window.addEventListener(
+      "beforeunload",
+      this.saveStateToLocalStorage.bind(this)
+    );
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(
+      "beforeunload",
+      this.saveStateToLocalStorage.bind(this)
+    );
+    // saves if component has a chance to unmount
+    this.saveStateToLocalStorage();
+  }
+
+  hydrateStateWithLocalStorage() {
+    // set state to back up in local storage 
+    this.setState(JSON.parse(localStorage.getItem('backup')))
+  }
+
+  saveStateToLocalStorage() {
+    localStorage.setItem('backup', JSON.stringify(this.state))
+  }
+  
+
   setSort = function(e, sort){
     e.preventDefault();
     console.log(sort, "clicked")
