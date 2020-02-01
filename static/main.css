@@ -10,13 +10,19 @@
   font-family: 'Roboto', sans-serif;
   display: grid;
   grid-template-columns: repeat(3, auto);
-  grid-gap: .75rem;
+  grid-gap: 3rem;
 }
 
-#feed > div {
-  padding: 0 .75rem;
+#breakingFeed{
+  min-height: 100vh;
+  color:black;
+  margin: 0px auto;
+  font-family: 'Roboto', sans-serif;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-gap: 4rem;
 }
-    
+
 #head{
   font-size: calc(10px + 5.25vmin);
   width:100%;
@@ -31,29 +37,71 @@
 .title{
   font-size: calc(10px + 2vmin) !important;
   font-family: 'Bitter', serif;
+  padding:15px;
 }
-    
-.item{
+
+.details{
+  padding:15px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.itemContainer{
+  float:"left";
+  clear:"both";
   width:100%;
-  margin:15px;
   background-color: white;
 }
-.image{
+  
+.item{
+  height: 450px;
+  overflow: scroll;
+}
+
+.itemImage{
+  max-height:200px;
+  object-fit: cover;
   width:100%;
 }
 
-.heart{
-  width: calc(100px + 2vmin);
-  padding:5px;
+.recentItem{
+  height: 525px;
+  overflow: scroll;
 }
 
-.heart:hover{
-  cursor: pointer;
+.recentImage{
+  max-height:250px;
+  object-fit: cover;
+  width:100%;
 }
 
-.sort:hover{
-  cursor: pointer;
-  color: white;
-  text-decoration: underline;
+
+.button {
+  display: inline-block;
+  height: 38px;
+  padding: 0 15px;
+  color: #555;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  margin: 15px;
 }
 
+.h1{
+  font-family: 'Bitter', serif !important;
+  background-color: white;
+  width:50%;
+  text-align: center;
+  /* margin:40px auto !important; */
+  font-size: calc(24px + 2vmin);
+  padding:15px;
+}

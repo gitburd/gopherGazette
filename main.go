@@ -48,7 +48,7 @@ func getNews(db *sql.DB) gin.HandlerFunc {
 func getNewsRecent(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var items []Item
-		rows, err := db.Query("SELECT * FROM news ORDER BY id DESC")
+		rows, err := db.Query("SELECT * FROM news ORDER BY id DESC LIMIT 4")
 		if err != nil {
 			c.String(http.StatusInternalServerError,
 				fmt.Sprintf("Error reading news: %q", err))
