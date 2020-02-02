@@ -46,7 +46,7 @@ class App extends React.Component{
         <div>
           <img 
             className="gopher"
-            src="../static/newsGopher.png" 
+            src="../static/gopher2.png" 
             style={{
               display: "block",
               top:"0",
