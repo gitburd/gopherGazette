@@ -1,9 +1,9 @@
 #main{
   min-height: 100vh;
   background: rgb(2,0,36);
-  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 39%, rgba(0,212,255,1) 100%);
-  /* background: rgb(0,0,0); */
-  /* background: linear-gradient(16deg, rgba(0,0,0,1) 0%, rgba(9,9,121,1) 39%, rgba(0,212,255,1) 100%); */
+  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 18%, rgba(0,212,255,1) 100%);
+  /* background: rgb(0,0,0);
+  background: linear-gradient(16deg, rgba(0,0,0,1) 0%, rgba(9,9,121,1) 39%, rgba(0,212,255,1) 100%); */
 }
 #feed{
   min-height: 100vh;
@@ -34,6 +34,7 @@
   text-align: 'center';
   display: block;
   background-color: black;
+  z-index: 2;
 }
 
 .title{

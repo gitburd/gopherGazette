@@ -161,18 +161,18 @@ class LikeButton extends React.Component {
     };
     addLike = (e, id) => {
       e.preventDefault();
+      console.log(id, "clicked");
       let newCount = this.state.likes + 1;
       this.setState({
         likes: newCount
-       }
-       ,
+      });
+      console.log(id, "clicked")
       fetch(`/up/${id}`,{
         method: 'PUT'
       })
       .then(res => res.json())
       .then(res => console.log("res:",res))
-      .catch(console.log()),
-      );
+      .catch(console.log())
     };
 
   render() {
