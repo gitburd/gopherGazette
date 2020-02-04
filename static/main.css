@@ -1,9 +1,7 @@
 #main{
   min-height: 100vh;
-  background: rgb(2,0,36);
-  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 18%, rgba(0,212,255,1) 100%);
-  /* background: rgb(0,0,0);
-  background: linear-gradient(16deg, rgba(0,0,0,1) 0%, rgba(9,9,121,1) 39%, rgba(0,212,255,1) 100%); */
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 8%, rgba(0,212,255,1) 66%);
 }
 #feed{
   min-height: 100vh;
@@ -27,7 +25,7 @@
 
 #head{
   font-size: calc(10px + 5.25vmin);
-  width:100%;
+  width:100% !important;
   color:white;
   padding:0;
   font-family: 'Bitter', serif;
