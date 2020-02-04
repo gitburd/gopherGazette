@@ -165,13 +165,13 @@ class LikeButton extends React.Component {
       this.setState({
         likes: newCount
        }
-      //  ,
-      // fetch(`/up/${id}`,{
-      //   method: 'PUT'
-      // })
-      // .then(res => res.json())
-      // .then(res => console.log("res:",res))
-      // .catch(console.log()),
+       ,
+      fetch(`/up/${id}`,{
+        method: 'PUT'
+      })
+      .then(res => res.json())
+      .then(res => console.log("res:",res))
+      .catch(console.log()),
       );
     };
 
