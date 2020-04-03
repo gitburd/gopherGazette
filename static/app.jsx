@@ -20,13 +20,10 @@ class App extends React.Component{
   render(){
     return(
       <div id="main">
-        <div id="home">
         <Home 
           items={this.state.items} 
           recent={this.state.recent}
         />
-        </div>
-       
       </div>
     )
   }
@@ -37,7 +34,7 @@ class Home extends React.Component{
     var {items} = this.props
     var {recent} = this.props
     return (
-      <div className="container" style={{backgroundColor:"hsla(0, 0%, 100%, 0.9)", padding:"10px 40px"}}>
+      <div className="container" style={{pading:"auto 40px"}}>
         <img 
             className="gopher"
             src="../static/gopher2.png" 
@@ -50,8 +47,7 @@ class Home extends React.Component{
           />
          
           
-        <h1 style={{fontSize:"40px", fontFamily:'Bitter', display: "block",
-              margin:"0 auto", paddingBottom:'25px', textAlign:'center'}}>
+        <h1 className='sec-title' style={{paddingBottom:'25px', backgroundColor:'transparent !important'}}>
           BREAKING GO NEWS
         </h1>
         <div id="breakingFeed" >
@@ -74,8 +70,7 @@ class Home extends React.Component{
             }}
           />
          
-         <h1 style={{fontSize:"40px", fontFamily:'Bitter', display: "block",
-              margin:"0 auto", paddingBottom:'25px', textAlign:'center'}}>
+         <h1 className='sec-title' style={{paddingBottom:'25px', backgroundColor:"transparent !important"}}>
           POPULAR STORIES
         </h1>
         <div id="feed" >
@@ -92,9 +87,9 @@ class Home extends React.Component{
    
 class Item extends React.Component{
   render(){
-    const { id, title, details, url, image, likes} = this.props.item;
+    const {title, details, url, image} = this.props.item;
     return(
-      <div className="itemContainer" style={{border:"1px solid", boxShadow: "5px 10px 8px #888888", padding:"20px"}}>
+      <div className="itemContainer" style={{padding:"20px"}}>
         <div className="item">
           <img className="itemImage" src={image} alt="" />
           <hr/>
@@ -119,9 +114,9 @@ class Item extends React.Component{
 
 class RecentItem extends React.Component{
   render(){
-    const { id, title, details, url, image, likes} = this.props.item;
+    const {title, details, url, image} = this.props.item;
     return(
-      <div className="itemContainer" style={{border:"1px solid", boxShadow: "5px 10px 8px #888888", padding:"30px"}}>
+      <div className="itemContainer" style={{padding:"30px"}}>
         <div className="recentItem">
           <img className="recentImage" src={image} alt={title}/>
           <hr/>
