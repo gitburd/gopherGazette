@@ -20,23 +20,13 @@ class App extends React.Component{
   render(){
     return(
       <div id="main">
-        <div>
-          <img 
-            className="gopher"
-            src="../static/gopher2.png" 
-            style={{
-              display: "block",
-              top:"0",
-              width:"37vmin",
-              paddingRight:"0",
-              margin:"0 auto",
-            }}
-          />
-        </div>
+        <div id="home">
         <Home 
           items={this.state.items} 
           recent={this.state.recent}
         />
+        </div>
+       
       </div>
     )
   }
@@ -47,30 +37,51 @@ class Home extends React.Component{
     var {items} = this.props
     var {recent} = this.props
     return (
-      <div className="container">
-        <h1 className="h1"
-          style={{margin:"5px auto 40px auto"}}
-        >
+      <div className="container" style={{backgroundColor:"hsla(0, 0%, 100%, 0.9)", padding:"10px 40px"}}>
+        <img 
+            className="gopher"
+            src="../static/gopher2.png" 
+            style={{
+              display: "block",
+              top:"0",
+              width:"37vmin",
+              margin:"0 auto"
+            }}
+          />
+         
+          
+        <h1 style={{fontSize:"40px", fontFamily:'Bitter', display: "block",
+              margin:"0 auto", paddingBottom:'25px', textAlign:'center'}}>
           BREAKING GO NEWS
         </h1>
         <div id="breakingFeed" >
           {recent.length > 0 ? 
             recent.map((item)=>(
-              <RecentItem item={item}/>))
+              <RecentItem item={item} key={item.id}/>))
             :"" 
           }
         </div>
 
-        <h1 
-          className="h1"
-          style={{margin:"40px auto"}}
-        >
+        <img 
+            className="gopher"
+            src="../static/gopher2.png" 
+            style={{
+              display: "block",
+              top:"0",
+              width:"37vmin",
+              margin:"0 auto", 
+              paddingTop:'40px'
+            }}
+          />
+         
+         <h1 style={{fontSize:"40px", fontFamily:'Bitter', display: "block",
+              margin:"0 auto", paddingBottom:'25px', textAlign:'center'}}>
           POPULAR STORIES
         </h1>
         <div id="feed" >
           {items.length > 0 ? 
             items.map((item)=>(
-              <Item item={item}/>))
+              <Item item={item} key={item.id}/>))
             :"" 
           }
         </div>
@@ -83,7 +94,7 @@ class Item extends React.Component{
   render(){
     const { id, title, details, url, image, likes} = this.props.item;
     return(
-      <div className="itemContainer">
+      <div className="itemContainer" style={{border:"1px solid", boxShadow: "5px 10px 8px #888888", padding:"20px"}}>
         <div className="item">
           <img className="itemImage" src={image} alt="" />
           <hr/>
@@ -110,7 +121,7 @@ class RecentItem extends React.Component{
   render(){
     const { id, title, details, url, image, likes} = this.props.item;
     return(
-      <div className="itemContainer">
+      <div className="itemContainer" style={{border:"1px solid", boxShadow: "5px 10px 8px #888888", padding:"30px"}}>
         <div className="recentItem">
           <img className="recentImage" src={image} alt={title}/>
           <hr/>

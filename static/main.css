@@ -1,7 +1,10 @@
 #main{
   min-height: 100vh;
   background: rgb(0,0,0);
-  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 8%, rgba(0,212,255,1) 66%);
+  /* background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 8%, rgba(0,212,255,1) 66%); */
+}
+#home{
+  background: red;
 }
 #feed{
   min-height: 100vh;
@@ -51,7 +54,10 @@
   float:"left";
   clear:"both";
   width:100%;
-  background-color: white;
+  background-color: white; 
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px 8px #888888;
 }
   
 .item{
