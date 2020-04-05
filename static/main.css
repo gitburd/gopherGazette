@@ -12,7 +12,8 @@
   font-family: 'Roboto', sans-serif;
   display: grid;
   grid-template-columns: repeat(3, auto);
-  grid-gap: 3rem;
+  grid-gap: 4rem;
+  padding:20px;
 }
 
 #breakingFeed{
@@ -23,6 +24,7 @@
   display: grid;
   grid-template-columns: repeat(3, auto);
   grid-gap: 4rem;
+  padding:20px;
 }
 
 #nav{
@@ -39,7 +41,7 @@
 }
 
 .title{
-  font-size: calc(10px + 2vmin) !important;
+  font-size: calc(14px + 1vmin) !important;
   font-family: 'Bitter', serif;
   padding:15px;
 }
@@ -51,7 +53,7 @@
 }
 
 .container{
-  background-color:hsla(0, 0%, 100%, 0.9);
+  background-color:hsla(0, 0%, 100%, 0.7);
   padding:10px 40px;
 }
 
@@ -65,23 +67,23 @@
 }
   
 .item{
-  height: 450px;
+  height: 350px;
   overflow: scroll;
 }
 
 .itemImage{
-  max-height:200px;
+  max-height:150px;
   object-fit: cover;
   width:100%;
 }
 
 .recentItem{
-  height: 525px;
+  height: 350px;
   overflow: scroll;
 }
 
 .recentImage{
-  max-height:250px;
+  max-height:150px;
   object-fit: cover;
   width:100%;
 }

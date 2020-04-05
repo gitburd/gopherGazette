@@ -41,7 +41,7 @@ class Home extends React.Component{
             style={{
               display: "block",
               top:"0",
-              width:"37vmin",
+              width:"18vmin",
               margin:"0 auto"
             }}
           />
@@ -64,7 +64,7 @@ class Home extends React.Component{
             style={{
               display: "block",
               top:"0",
-              width:"37vmin",
+              width:"18vmin",
               margin:"0 auto", 
               paddingTop:'40px'
             }}
