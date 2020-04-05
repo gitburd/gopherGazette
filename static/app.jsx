@@ -1,5 +1,3 @@
-import {useState} from 'react'
-
 class App extends React.Component{
   
   state={
@@ -32,24 +30,31 @@ class App extends React.Component{
 }
 
 class Home extends React.Component{
+  state={
+    currentPage:1,
+    itemsPerPage:9
+  }
+
   render(){
-    var {items} = this.props
-    var {recent} = this.props
+    const {items} = this.props
+    const {recent} = this.props 
+    const {currentPage, itemsPerPage} = this.state
+    let pages =[];
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(9);
+    for(let i=1; i <= Math.ceil(items.length/itemsPerPage); i++){
+      pages.push(i)
+    } 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = items.slice(indexOfFirstItem,indexOfLastItem)
 
-     // Get current item
-     const indexOfLastItem = currentPage * itemsPerPage;
-     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-     const currentItems = items.slice(indexOfFirstItem,indexOfLastItem)
- 
-     //change page 
-     const paginate = (pageNumber) => setCurrentPage(pageNumber)
+    const paginate = (pageNumber) => this.setState({currentPage:pageNumber})
 
     return (
-      <div className="container" style={{pading:"auto 40px"}}>
-        <img 
+      <div style={{pading:"auto 40px"}}>
+
+        <div className="box" >
+          <img 
             className="gopher"
             src="../static/gopher2.png" 
             style={{
@@ -59,42 +64,52 @@ class Home extends React.Component{
               margin:"0 auto"
             }}
           />
-         
           
-        <h1 className='sec-title' style={{paddingBottom:'25px', backgroundColor:'transparent !important'}}>
-          BREAKING GO NEWS
-        </h1>
-        <div id="breakingFeed" >
-          {recent.length > 0 ? 
-            recent.map((item)=>(
-              <RecentItem item={item} key={item.id}/>))
-            :"" 
-          }
+          <h1 className='sec-title' style={{paddingBottom:'25px', backgroundColor:'transparent !important'}}>
+            BREAKING GO NEWS
+          </h1>
+          <div className="feed" >
+            {recent && recent.map((item)=>(
+                <RecentItem item={item} key={item.id}/>
+              ))
+            }
+          </div>
         </div>
+        
+        
+        <div className="box" style={{marginTop:'80px'}}>
+          <img 
+              className="gopher"
+              src="../static/gopher2.png" 
+              style={{
+                display: "block",
+                top:"0",
+                width:"18vmin",
+                margin:"0 auto", 
+              }}
+            />
+  
 
-        <img 
-            className="gopher"
-            src="../static/gopher2.png" 
-            style={{
-              display: "block",
-              top:"0",
-              width:"18vmin",
-              margin:"0 auto", 
-              paddingTop:'40px'
-            }}
-          />
-         
-         <h1 className='sec-title' style={{paddingBottom:'25px', backgroundColor:"transparent !important"}}>
+         <h1 className='sec-title' >
           POPULAR STORIES
         </h1>
-        <div id="feed" >
-          {currentItems.length > 0 ? 
-            currentItems.map((item)=>(
-              <Item item={item} key={item.id}/>))
-            :"" 
+        <Pagination 
+          pages = {pages}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+        <div className="feed" >
+          {currentItems && currentItems.map((item)=>(
+              <Item item={item} key={item.id}/>
+            ))
           }
         </div>
-        <Pagination itemsPerPage={itemsPerPage} totalItems={totalItems} paginate={paginate} currentPage={currentPage}/>
+        <Pagination 
+          pages = {pages}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+      </div>
       </div>
     )
   }    
@@ -198,25 +213,29 @@ class LikeButton extends React.Component {
   }
 }
 
-class Pagination extends React.Component{
+class Pagination extends React.Component {
   render(){
+    const{paginate, pages, currentPage}= this.props
 
-    // const {itemsPerPage, totalItems, paginate, currentPage} = this.props
     return(
-      <ul className='pagination'>
-        {pageNumbers.map(number => (
-            <li key={number}>
-                <h3 className={number === currentPage ? 'active':''} onClick={()=> paginate(number)}>
-                  {number}
-                </h3> 
-            </li>
-        ))} 
+      <ul className='pagination' style={{
+        margin:'0 auto',
+        textAlign: 'center',
+        width:'100%'}}>
+        {pages.map(page=>(
+          <li 
+            key={page}
+            onClick={()=> paginate(page)}
+          >
+            <h3 className={page === currentPage ? 'active':''}>{page}</h3> 
+          </li>
+        ))}
       </ul>
     )
   }
-
-}
   
+}
+
 ReactDOM.render(
   <App />,
   document.getElementById("app")
