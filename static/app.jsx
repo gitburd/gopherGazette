@@ -1,3 +1,5 @@
+import {useState} from 'react'
+
 class App extends React.Component{
   
   state={
@@ -33,6 +35,18 @@ class Home extends React.Component{
   render(){
     var {items} = this.props
     var {recent} = this.props
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(9);
+
+     // Get current item
+     const indexOfLastItem = currentPage * itemsPerPage;
+     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+     const currentItems = items.slice(indexOfFirstItem,indexOfLastItem)
+ 
+     //change page 
+     const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
     return (
       <div className="container" style={{pading:"auto 40px"}}>
         <img 
@@ -74,12 +88,13 @@ class Home extends React.Component{
           POPULAR STORIES
         </h1>
         <div id="feed" >
-          {items.length > 0 ? 
-            items.map((item)=>(
+          {currentItems.length > 0 ? 
+            currentItems.map((item)=>(
               <Item item={item} key={item.id}/>))
             :"" 
           }
         </div>
+        <Pagination itemsPerPage={itemsPerPage} totalItems={totalItems} paginate={paginate} currentPage={currentPage}/>
       </div>
     )
   }    
@@ -181,6 +196,25 @@ class LikeButton extends React.Component {
       );
     }
   }
+}
+
+class Pagination extends React.Component{
+  render(){
+
+    // const {itemsPerPage, totalItems, paginate, currentPage} = this.props
+    return(
+      <ul className='pagination'>
+        {pageNumbers.map(number => (
+            <li key={number}>
+                <h3 className={number === currentPage ? 'active':''} onClick={()=> paginate(number)}>
+                  {number}
+                </h3> 
+            </li>
+        ))} 
+      </ul>
+    )
+  }
+
 }
   
 ReactDOM.render(
