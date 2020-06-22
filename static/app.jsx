@@ -1,5 +1,4 @@
 class App extends React.Component{
-  
   state={
     items:[],
     recent:[]
@@ -32,13 +31,84 @@ class App extends React.Component{
 class Home extends React.Component{
   state={
     currentPage:1,
-    itemsPerPage:9
+    itemsPerPage:9,
+    itemIdx : 0
+  }
+  
+
+  onLeftClick = () => {
+    if(this.state.itemIdx === 0){
+      this.setState({itemIdx: 5})
+    }else{
+      let newIndex = this.state.itemIdx -1;
+      this.setState({itemIdx: newIndex})  
+    }
+  }
+
+  onRightClick = () => {
+    console.log('on right click', this.state.itemIdx)
+    
+    if(this.state.itemIdx < 5){
+      let newIdx = this.state.itemIdx + 1
+      this.setState({itemIdx: newIdx})  
+    }
+    else{
+      this.setState({itemIdx: 0})
+    }
+  }
+
+  componentDidMount() {
+    setInterval(this.onRightClick, 4000); // runs every 5 seconds.
   }
 
   render(){
     const {items} = this.props
-    const {recent} = this.props 
-    const {currentPage, itemsPerPage} = this.state
+    const recent = [
+      {
+        'id':0,
+        title: 't0', 
+        details:'d0', 
+        url:'google.com', 
+        image:"../static/newsGopher.png"
+      }, 
+      {
+        'id':1,
+        title: 't1', 
+        details:'d1', 
+        url:'google.com', 
+        image: "../static/heart.png" 
+      },
+
+      {
+        'id':2,
+        title: 't2', 
+        details:'d2', 
+        url:'google.com', 
+        image: "../static/gopher2.png" 
+      },
+      {
+        'id':3,
+        title: 't3', 
+        details:'d3', 
+        url:'google.com', 
+        image:"../static/newsGopher.png"
+      }, 
+      {
+        'id':4,
+        title: 't4', 
+        details:'d4', 
+        url:'google.com', 
+        image: "../static/heart.png" 
+      },
+      {
+        'id':5,
+        title: 't5', 
+        details:'d5', 
+        url:'google.com', 
+        image: "../static/gopher2.png" 
+      }
+    ]
+    const {currentPage, itemsPerPage, itemIdx} = this.state
     let pages =[];
 
     for(let i=1; i <= Math.ceil(items.length/itemsPerPage); i++){
@@ -52,45 +122,33 @@ class Home extends React.Component{
 
     return (
       <div style={{pading:"auto 40px"}}>
-
         <div className="box" >
-          <img 
-            className="gopher"
-            src="../static/gopher2.png" 
-            style={{
-              display: "block",
-              top:"0",
-              width:"18vmin",
-              margin:"0 auto"
-            }}
-          />
-          
           <h1 className='sec-title' style={{paddingBottom:'25px', backgroundColor:'transparent !important'}}>
-            BREAKING GO NEWS
+          Breaking Go News
+          <br/>
+          <img 
+            src="../static/left-arrow.png" 
+            className='arrowIcon'
+            onClick={this.onLeftClick}
+          />
+            
+          <img 
+            src="../static/right-arrow.png" 
+            className='arrowIcon'
+            style={{float:'right'}}
+            onClick={this.onRightClick}
+          />
           </h1>
-          <div className="feed" >
-            {recent && recent.map((item)=>(
-                <RecentItem item={item} key={item.id}/>
-              ))
-            }
+          <br/>
+          
+          <div style={{width:'100%', alignContent:'center', display:'block', margin:'0 auto', clear:'both' }}>
+            <RecentItem item={recent[itemIdx]} key={recent[0].id}/>
           </div>
         </div>
         
-        
         <div className="box" style={{marginTop:'80px'}}>
-          <img 
-              className="gopher"
-              src="../static/gopher2.png" 
-              style={{
-                display: "block",
-                top:"0",
-                width:"18vmin",
-                margin:"0 auto", 
-              }}
-            />
-  
 
-         <h1 className='sec-title' >
+        <h1 className='sec-title' >
           POPULAR STORIES
         </h1>
         <Pagination 
@@ -146,10 +204,9 @@ class RecentItem extends React.Component{
   render(){
     const {title, details, url, image} = this.props.item;
     return(
-      <div className="itemContainer" style={{padding:"30px"}}>
+      <div className="itemContainer" style={{width:'80%', margin:'0 auto'}}>
         <div className="recentItem">
           <img className="recentImage" src={image} alt={title}/>
-          <hr/>
           <div className="title"> 
             <a href={url} target="_blank">
               <div>
@@ -233,7 +290,6 @@ class Pagination extends React.Component {
       </ul>
     )
   }
-  
 }
 
 ReactDOM.render(

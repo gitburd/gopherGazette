@@ -1,13 +1,11 @@
 #main{
   padding:0 40px 40px 40px;
   min-height: 100vh;
-  background: rgb(0,0,0);
-  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 8%, rgba(0,212,255,1) 66%);
+  background-color: #F9F8F4;
 }
 
 
 .feed{
-  /* min-height: 100vh; */
   color:black;
   margin: 0px auto;
   font-family: 'Roboto', sans-serif;
@@ -18,14 +16,13 @@
 }
 
 #nav{
+  float:left;
   font-size: calc(10px + 5.25vmin);
   width:100% !important;
-  color:white;
+  color: #F9F8F4;
   padding:0;
   font-family: 'Bitter', serif;
   text-align: 'center';
-  display: block;
-  margin:0 auto;
   background-color: black;
   z-index: 2;
 }
@@ -43,7 +40,6 @@
 }
 
 .box{
-  background-color:hsla(0, 0%, 100%, .95);
   padding:20px;
   margin: auto;
 }
@@ -69,14 +65,16 @@
 }
 
 .recentItem{
-  height: 350px;
+  height: 415px;
   overflow: scroll;
 }
 
 .recentImage{
-  max-height:150px;
-  object-fit: cover;
-  width:100%;
+  object-fit: scale-down;
+  max-width:50%;
+  float:left;
+  padding-right:30px;
+  padding-bottom: 30px;
 }
 
 
@@ -131,4 +129,13 @@
 .active{
   color: #337AB7;
   text-decoration: underline;
+}
+
+.arrowIcon{
+  width:40px; 
+  float:left;
+}
+
+.arrowIcon:hover{
+  cursor: pointer;
 }
