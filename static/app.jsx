@@ -35,7 +35,6 @@ class Home extends React.Component{
     itemIdx : 0
   }
   
-
   onLeftClick = () => {
     if(this.state.itemIdx === 0){
       this.setState({itemIdx: 5})
@@ -62,52 +61,8 @@ class Home extends React.Component{
   }
 
   render(){
-    const {items} = this.props
-    const recent = [
-      {
-        'id':0,
-        title: 't0', 
-        details:'d0', 
-        url:'google.com', 
-        image:"../static/newsGopher.png"
-      }, 
-      {
-        'id':1,
-        title: 't1', 
-        details:'d1', 
-        url:'google.com', 
-        image: "../static/heart.png" 
-      },
-
-      {
-        'id':2,
-        title: 't2', 
-        details:'d2', 
-        url:'google.com', 
-        image: "../static/gopher2.png" 
-      },
-      {
-        'id':3,
-        title: 't3', 
-        details:'d3', 
-        url:'google.com', 
-        image:"../static/newsGopher.png"
-      }, 
-      {
-        'id':4,
-        title: 't4', 
-        details:'d4', 
-        url:'google.com', 
-        image: "../static/heart.png" 
-      },
-      {
-        'id':5,
-        title: 't5', 
-        details:'d5', 
-        url:'google.com', 
-        image: "../static/gopher2.png" 
-      }
-    ]
+    const {items, recent} = this.props
+    
     const {currentPage, itemsPerPage, itemIdx} = this.state
     let pages =[];
 
@@ -120,9 +75,12 @@ class Home extends React.Component{
 
     const paginate = (pageNumber) => this.setState({currentPage:pageNumber})
 
+    console.log('recent',recent)
     return (
-      <div style={{pading:"auto 40px"}}>
+      <div style={{pading:"auto 20px"}}>
         <div className="box" >
+        {recent && recent.length > 0 && 
+        <>
           <h1 className='sec-title' style={{paddingBottom:'25px', backgroundColor:'transparent !important'}}>
           Breaking Go News
           <br/>
@@ -140,10 +98,12 @@ class Home extends React.Component{
           />
           </h1>
           <br/>
-          
           <div style={{width:'100%', alignContent:'center', display:'block', margin:'0 auto', clear:'both' }}>
-            <RecentItem item={recent[itemIdx]} key={recent[0].id}/>
+            <RecentItem item={recent[itemIdx]} />
           </div>
+          </>
+          }
+          
         </div>
         
         <div className="box" style={{marginTop:'80px'}}>
