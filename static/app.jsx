@@ -31,40 +31,51 @@ class App extends React.Component{
 class Home extends React.Component{
   state={
     currentPage:1,
-    itemsPerPage:9,
+    itemsPerPage:6,
     itemIdx : 0
   }
   
   onLeftClick = () => {
     if(this.state.itemIdx === 0){
-      this.setState({itemIdx: 5})
+      this.setState({itemIdx: 5}, clearInterval(this.interval))
     }else{
       let newIndex = this.state.itemIdx -1;
-      this.setState({itemIdx: newIndex})  
+      this.setState({itemIdx: newIndex}, clearInterval(this.interval))  
     }
   }
 
   onRightClick = () => {
-    console.log('on right click', this.state.itemIdx)
     
     if(this.state.itemIdx < 5){
       let newIdx = this.state.itemIdx + 1
-      this.setState({itemIdx: newIdx})  
+      this.setState({itemIdx: newIdx}, clearInterval(this.interval)) 
+
+    }
+    else{
+      this.setState({itemIdx: 0}, clearInterval(this.interval))
+    }
+  }
+
+  autoScroll = () => {
+    if(this.state.itemIdx < 5){
+      let newIdx = this.state.itemIdx + 1
+      this.setState({itemIdx: newIdx}) 
+
     }
     else{
       this.setState({itemIdx: 0})
     }
   }
 
-  componentDidMount() {
-    setInterval(this.onRightClick, 4000); // runs every 5 seconds.
+  componentDidMount() {  
+    this.interval = setInterval(this.autoScroll, 4500); 
   }
 
   render(){
     const {items, recent} = this.props
     
     const {currentPage, itemsPerPage, itemIdx} = this.state
-    let pages =[];
+    let pages = [];
 
     for(let i=1; i <= Math.ceil(items.length/itemsPerPage); i++){
       pages.push(i)
@@ -75,7 +86,6 @@ class Home extends React.Component{
 
     const paginate = (pageNumber) => this.setState({currentPage:pageNumber})
 
-    console.log('recent',recent)
     return (
       <div style={{pading:"auto 20px"}}>
         <div className="box" >
@@ -106,7 +116,7 @@ class Home extends React.Component{
           
         </div>
         
-        <div className="box" style={{marginTop:'80px'}}>
+        <div className="box" >
 
         <h1 className='sec-title' >
           POPULAR STORIES
@@ -139,17 +149,15 @@ class Item extends React.Component{
     return(
       <div className="itemContainer" style={{padding:"20px"}}>
         <div className="item">
-          <img className="itemImage" src={image} alt="" />
-          <hr/>
-          <div 
-          className="title" > 
+          <img className="image" src={image} alt={title} />
+          <div className="title" > 
             <a href={url} target="_blank">
               <div>
                 {title} 
               </div>
             </a>
           </div>
-          <div  className="details">
+          <div  className="details" style={{paddingLeft:'0px'}}>
             {details}  
           </div>
         </div> 
@@ -164,9 +172,9 @@ class RecentItem extends React.Component{
   render(){
     const {title, details, url, image} = this.props.item;
     return(
-      <div className="itemContainer" style={{width:'80%', margin:'0 auto'}}>
+      <div className="itemContainer" style={{width:'70%', margin:'0 auto'}}>
         <div className="recentItem">
-          <img className="recentImage" src={image} alt={title}/>
+          <img className="image" src={image} alt={title}/>
           <div className="title"> 
             <a href={url} target="_blank">
               <div>

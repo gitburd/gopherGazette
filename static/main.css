@@ -4,27 +4,27 @@
   background-color: #F9F8F4;
 }
 
-
 .feed{
   color:black;
   margin: 0px auto;
   font-family: 'Roboto', sans-serif;
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(2, auto);
   grid-gap: 4rem;
   padding: 0 20px;
 }
 
 #nav{
   float:left;
-  font-size: calc(10px + 5.25vmin);
+  font-size: calc(10px + 6.3vmin);
   width:100% !important;
   color: #F9F8F4;
-  padding:0;
+  padding:0 10px;
   font-family: 'Bitter', serif;
   text-align: 'center';
   background-color: black;
   z-index: 2;
+  height:80px;
 }
 
 .title{
@@ -34,7 +34,6 @@
 }
 
 .details{
-  padding:15px;
   text-align: justify;
   text-justify: inter-word;
 }
@@ -54,29 +53,24 @@
 }
   
 .item{
-  height: 350px;
+  height:50vh;
   overflow: scroll;
-}
-
-.itemImage{
-  max-height:150px;
-  object-fit: cover;
-  width:100%;
+  padding:20px;
 }
 
 .recentItem{
-  height: 415px;
+  height:40vh;
   overflow: scroll;
+  padding:20px;
 }
 
-.recentImage{
+.image{
   object-fit: scale-down;
-  max-width:50%;
+  max-width:40%;
   float:left;
-  padding-right:30px;
-  padding-bottom: 30px;
+  padding-right:15px;
+  padding-bottom: 15px;
 }
-
 
 .button {
   display: inline-block;
@@ -100,7 +94,7 @@
 
 .sec-title{
   display: block;
-  margin:0 auto; 
+  margin:10px auto; 
   font-family: 'Bitter', serif !important;
   background-color:transparent !important;
   text-align: center;
