@@ -149,7 +149,9 @@ class Item extends React.Component{
     return(
       <div className="itemContainer" style={{padding:"20px"}}>
         <div className="item">
-          <img className="image" src={image} alt={title} />
+        {image && (
+            <img className="image" src={image} alt={title}/>
+          )}
           <div className="title" > 
             <a href={url} target="_blank">
               <div>
@@ -169,12 +171,31 @@ class Item extends React.Component{
 }
 
 class RecentItem extends React.Component{
+  state = {
+    likes: this.props.likes
+  };
+
+  addLike = (e, id) => {
+    e.preventDefault();
+    
+    fetch(`/up/${id}`,{
+      method: 'PUT'
+    })
+    .then(res => res.json())
+    .catch(console.log())
+  };
+
   render(){
-    const {title, details, url, image} = this.props.item;
+    const {id, title, details, url, image, likes } = this.props.item;
     return(
-      <div className="itemContainer" style={{width:'70%', margin:'0 auto'}}>
+      <div 
+        className="itemContainer" style={{width:'70%', margin:'0 auto'}}
+        onClick={e => this.addLike(e, id)}
+      >
         <div className="recentItem">
-          <img className="image" src={image} alt={title}/>
+          {image && (
+            <img className="image" src={image} />
+          )}
           <div className="title"> 
             <a href={url} target="_blank">
               <div>
@@ -185,9 +206,12 @@ class RecentItem extends React.Component{
           <div className="details">
             {details}  
           </div>
+            <button className="button">
+              <i className="fas fa-heart fa-lg" style={{ color: "#33c3f0" }}></i>
+            </button>
+            {likes} 
         </div> 
-        <LikeButton likes = {this.props.item.likes} id = {this.props.item.id}/>
-      </div>
+     </div>
     )
   }
 }
@@ -207,7 +231,6 @@ class LikeButton extends React.Component {
         method: 'PUT'
       })
       .then(res => res.json())
-      .then(res => console.log("res:",res))
       .catch(console.log())
     };
 

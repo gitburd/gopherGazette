@@ -19,12 +19,15 @@
   font-size: calc(10px + 6.3vmin);
   width:100% !important;
   color: #F9F8F4;
-  padding:0 10px;
+  text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
   font-family: 'Bitter', serif;
   text-align: 'center';
-  background-color: black;
   z-index: 2;
-  height:80px;
+  height:70px;
 }
 
 .title{
